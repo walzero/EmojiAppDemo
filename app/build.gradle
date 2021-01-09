@@ -45,7 +45,9 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Android KTX
-    implementation "androidx.core:core-ktx:$version_core"
+    implementation("androidx.core:core-ktx:$version_core") {
+        exclude group: 'kotlin-stdlib', module: 'kotlin'
+    }
 
     //AppCompat
     implementation "androidx.appcompat:appcompat:$app_compat"
