@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menu_fragment"
-        android:name="com.walterrezende.emojiappdemo.presentation.MenuFragment"
+        android:name="com.walterrezende.emojiappdemo.presentation.fragment.MenuFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_menu">
 

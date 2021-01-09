@@ -1,4 +1,4 @@
-package com.walterrezende.emojiappdemo.presentation
+package com.walterrezende.emojiappdemo.presentation.fragment
 
 import androidx.fragment.app.Fragment
 
