@@ -3,11 +3,10 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/Dark_Slate_Grey</item>
-        <item name="colorPrimaryVariant">@color/Midnight_Blue</item>
+        <item name="colorPrimaryVariant">@color/Gunmetal</item>
         <item name="colorOnPrimary">@color/Pearl</item>
         <item name="android:windowBackground">@color/DarkerGray</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 </resources>

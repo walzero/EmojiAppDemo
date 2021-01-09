@@ -3,12 +3,11 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/Slight_Blue</item>
-        <item name="colorPrimaryVariant">@color/Leaf</item>
+        <item name="colorPrimaryVariant">@color/DarkGray</item>
         <item name="colorOnPrimary">@color/Web_White</item>
         <item name="android:windowBackground">@color/Web_White</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="AppTheme" />

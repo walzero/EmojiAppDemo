@@ -3,6 +3,7 @@
 
     <color name="Black">#000000</color>
     <color name="DarkerGray">#141414</color>
+    <color name="DarkGray">#262626</color>
     <color name="Gunmetal">#2C3539</color>
     <color name="Midnight">#2B1B17</color>
     <color name="Charcoal">#34282C</color>
