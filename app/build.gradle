@@ -16,6 +16,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,18 +40,42 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Kotlin StdLib
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-alpha2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Android KTX
+    implementation "androidx.core:core-ktx:$version_core"
+
+    //AppCompat
+    implementation "androidx.appcompat:appcompat:$app_compat"
+
+    //Material
+    implementation "com.google.android.material:material:$material_version"
+
+    //ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
+    // Room
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
+
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+
+    //Tests
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    // Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 }
