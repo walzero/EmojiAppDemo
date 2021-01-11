@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Emoji App</string>
-    <string name="button_emojis">Emojis</string>
+    <string name="button_emojis">List Emojis</string>
 </resources>

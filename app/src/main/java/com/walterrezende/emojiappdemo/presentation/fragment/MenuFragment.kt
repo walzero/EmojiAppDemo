@@ -44,7 +44,8 @@ class MenuFragment : Fragment() {
     ): View {
         binding = FragmentMenuBinding.inflate(inflater, container, false)
 
-        binding.viewModel = menuViewModel
+        binding.menuViewModel = menuViewModel
+        binding.emojiViewModel = emojiViewModel
         binding.lifecycleOwner = this
 
         return binding.root

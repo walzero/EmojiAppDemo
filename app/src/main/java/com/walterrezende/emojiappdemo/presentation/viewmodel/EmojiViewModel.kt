@@ -1,8 +1,6 @@
 package com.walterrezende.emojiappdemo.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.walterrezende.emojiappdemo.repository.api.EmojiApi
 import com.walterrezende.emojiappdemo.repository.dao.EmojiDatabaseDao
 import com.walterrezende.emojiappdemo.repository.data.Emoji
@@ -18,12 +16,24 @@ class EmojiViewModel(
     val emojiList: LiveData<List<Emoji>>
         get() = database.getAllEmojis()
 
+    private val _randomEmoji = MutableLiveData<Emoji?>()
+    val randomEmoji = Transformations.map(_randomEmoji) {
+        it ?: Emoji()
+    }
+
     init {
         fetchEmojiList()
+        chooseRandomEmoji()
     }
 
     fun onEmojiClicked(emojiId: Long) {
 
+    }
+
+    fun chooseRandomEmoji() {
+        viewModelScope.launch {
+            _randomEmoji.value = queryRandomEmoji()
+        }
     }
 
     fun fetchEmojiList() {
@@ -33,12 +43,20 @@ class EmojiViewModel(
                 val result = EmojiApi.retrofitService.getEmojis()
                 Timber.d("##EMOJI SERVICE_LIST_SIZE: ${result.size}")
 
-                if (result.isNotEmpty())
+                if (result.isNotEmpty()) {
                     insert(result)
+                    chooseRandomEmoji()
+                }
 
             } catch (e: Exception) {
                 Timber.e(e)
             }
+        }
+    }
+
+    private suspend fun queryRandomEmoji(): Emoji? {
+        return withContext(Dispatchers.IO) {
+            database.getRandomEmoji()
         }
     }
 

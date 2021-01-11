@@ -6,7 +6,11 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="emojiViewModel"
+            type="com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiViewModel" />
+
+        <variable
+            name="menuViewModel"
             type="com.walterrezende.emojiappdemo.presentation.viewmodel.MenuViewModel" />
     </data>
 
@@ -14,15 +18,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.goToEmojisList()}"
-            android:text="@string/button_emojis"
-            android:textAllCaps="false"
+        <ImageView
+            android:id="@+id/emoji_image"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            app:imageUrl="@{emojiViewModel.randomEmoji.url}"
+            app:layout_constraintBottom_toTopOf="@+id/emoji_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:srcCompat="?attr/dummyIcon" />
+
+        <TextView
+            android:id="@+id/emoji_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:gravity="center"
+            android:text="@{emojiViewModel.randomEmoji.name}"
+            app:layout_constraintBottom_toTopOf="@+id/list_emojis_button"
+            app:layout_constraintEnd_toEndOf="@+id/emoji_image"
+            app:layout_constraintStart_toStartOf="@+id/emoji_image"
+            app:layout_constraintTop_toBottomOf="@+id/emoji_image"
+            tools:text="ABC!" />
+
+        <ImageButton
+            android:id="@+id/randomize_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorPrimary"
+            android:onClick="@{() -> emojiViewModel.chooseRandomEmoji()}"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/list_emojis_button"
+            app:layout_constraintEnd_toStartOf="@+id/list_emojis_button"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/list_emojis_button"
+            app:srcCompat="@drawable/ic_autorenew_white_24" />
+
+        <Button
+            android:id="@+id/list_emojis_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:onClick="@{() -> menuViewModel.goToEmojisList()}"
+            android:text="@string/button_emojis"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/randomize_button"
+            app:layout_constraintTop_toBottomOf="@+id/emoji_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
