@@ -1,4 +1,5 @@
 *.iml
+*.iCloud
 .gradle
 /local.properties
 /.idea/*
