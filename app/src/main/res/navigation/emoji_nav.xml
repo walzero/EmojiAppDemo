@@ -11,6 +11,15 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_menu">
 
+        <action
+            android:id="@+id/action_menu_fragment_to_emoji_list_fragment"
+            app:destination="@id/emoji_list_fragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/emoji_list_fragment"
+        android:name="com.walterrezende.emojiappdemo.presentation.fragment.EmojiListFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_emojis_list"/>
 
 </navigation>

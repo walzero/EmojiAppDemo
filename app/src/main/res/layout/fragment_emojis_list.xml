@@ -7,22 +7,26 @@
 
         <variable
             name="viewModel"
-            type="com.walterrezende.emojiappdemo.presentation.viewmodel.MenuViewModel" />
+            type="com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModel" />
+
+        <variable
+            name="gridLayoutManager"
+            type="androidx.recyclerview.widget.GridLayoutManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.goToEmojisList()}"
-            android:text="@string/button_emojis"
-            android:textAllCaps="false"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/emoji_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="@{gridLayoutManager}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
