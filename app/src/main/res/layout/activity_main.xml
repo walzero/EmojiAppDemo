@@ -35,9 +35,9 @@
                     android:background="?attr/colorPrimary"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:titleTextColor="?attr/colorOnPrimary"
                     app:title="@string/app_name"
-                    app:titleEnabled="true" />
+                    app:titleEnabled="true"
+                    app:titleTextColor="?attr/colorOnPrimary" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

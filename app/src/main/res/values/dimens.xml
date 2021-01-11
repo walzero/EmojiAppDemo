@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="icon_size">64dp</dimen>
+    <dimen name="icon_large_size">128dp</dimen>
+    <dimen name="icon_frame_large_size">148dp</dimen>
+    <dimen name="large_margin">32dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="elevation">16dp</dimen>
 </resources>

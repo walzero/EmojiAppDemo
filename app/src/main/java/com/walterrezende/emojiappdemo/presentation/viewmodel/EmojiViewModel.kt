@@ -23,7 +23,6 @@ class EmojiViewModel(
 
     init {
         fetchEmojiList()
-        chooseRandomEmoji()
     }
 
     fun onEmojiClicked(emojiId: Long) {
