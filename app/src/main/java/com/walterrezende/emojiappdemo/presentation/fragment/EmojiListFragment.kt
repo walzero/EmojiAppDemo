@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.walterrezende.emojiappdemo.R
 import com.walterrezende.emojiappdemo.databinding.FragmentEmojisListBinding
 import com.walterrezende.emojiappdemo.extensions.createGridLayoutManager
 import com.walterrezende.emojiappdemo.presentation.adapter.EmojiClickListener
 import com.walterrezende.emojiappdemo.presentation.adapter.EmojiListAdapter
-import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModel
-import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModelFactory
+import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiViewModel
+import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiViewModelFactory
 import com.walterrezende.emojiappdemo.repository.data.Emoji
 import com.walterrezende.emojiappdemo.repository.database.EmojiDatabase
 import timber.log.Timber
@@ -26,17 +24,17 @@ class EmojiListFragment : Fragment() {
     private val adapter by lazy { EmojiListAdapter(adapterListener) }
 
     private val adapterListener = EmojiClickListener { emojiId ->
-        emojiListViewModel.onEmojiClicked(emojiId)
+        emojiViewModel.onEmojiClicked(emojiId)
     }
 
-    private val emojiListViewModel: EmojiListViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory).get(EmojiListViewModel::class.java)
+    private val emojiViewModel: EmojiViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(EmojiViewModel::class.java)
     }
 
-    private val viewModelFactory: EmojiListViewModelFactory by lazy {
+    private val viewModelFactory: EmojiViewModelFactory by lazy {
         val application = requireNotNull(this.activity).application
         val dataSource = EmojiDatabase.getInstance(application).emojiDatabaseDao
-        EmojiListViewModelFactory(dataSource)
+        EmojiViewModelFactory(dataSource)
     }
 
     private val emojiListObserver by lazy {
@@ -54,9 +52,9 @@ class EmojiListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_emojis_list, container, false)
+        binding = FragmentEmojisListBinding.inflate(inflater, container, false)
 
-        binding.viewModel = emojiListViewModel
+        binding.viewModel = emojiViewModel
         binding.gridLayoutManager = createGridLayoutManager()
         binding.emojiList.adapter = adapter
         binding.lifecycleOwner = this
@@ -74,13 +72,13 @@ class EmojiListFragment : Fragment() {
     }
 
     private fun addObservers() {
-        with(emojiListViewModel) {
+        with(emojiViewModel) {
             emojiList.observe(this@EmojiListFragment, emojiListObserver)
         }
     }
 
     private fun removeObservers() {
-        with(emojiListViewModel) {
+        with(emojiViewModel) {
             emojiList.removeObserver(emojiListObserver)
         }
     }

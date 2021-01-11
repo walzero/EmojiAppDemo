@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class EmojiListViewModel(
+class EmojiViewModel(
     private val database: EmojiDatabaseDao,
 ) : ViewModel() {
 
@@ -27,7 +27,7 @@ class EmojiListViewModel(
     }
 
     fun fetchEmojiList() {
-        Timber.d("##EMOJI FETCHING_SERVER_LIST!:")
+        Timber.d("##EMOJI FETCHING_SERVER_LIST!")
         viewModelScope.launch {
             try {
                 val result = EmojiApi.retrofitService.getEmojis()

@@ -38,6 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{emoji.name}"
             app:layout_constraintEnd_toEndOf="@+id/emoji_image"
             app:layout_constraintStart_toStartOf="@+id/emoji_image"
             app:layout_constraintTop_toBottomOf="@+id/emoji_image"

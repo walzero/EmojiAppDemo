@@ -15,6 +15,9 @@ interface EmojiDatabaseDao {
     @Update
     suspend fun update(emoji: Emoji)
 
+    @Query("SELECT * FROM emojis ORDER BY RANDOM() LIMIT 1")
+    fun getRandomEmoji(): Emoji?
+
     @Query("SELECT * from emojis")
     fun getAllEmojis(): LiveData<List<Emoji>>
 
