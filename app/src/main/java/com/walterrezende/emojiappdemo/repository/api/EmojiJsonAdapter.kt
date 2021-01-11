@@ -15,7 +15,10 @@ internal class EmojiJsonAdapter {
         try {
             reader.beginObject()
             while (reader.hasNext()) {
-                val emoji = Emoji(name = reader.nextName(), url = reader.nextString())
+                val name = reader.nextName()
+                val url = reader.nextString()
+                val emoji = Emoji(name = name, url = url)
+
                 emojiList.add(emoji)
             }
             reader.endObject()
@@ -26,5 +29,4 @@ internal class EmojiJsonAdapter {
         }
         return emojiList
     }
-
 }

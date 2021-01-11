@@ -14,7 +14,10 @@ import com.walterrezende.emojiappdemo.extensions.createGridLayoutManager
 import com.walterrezende.emojiappdemo.presentation.adapter.EmojiClickListener
 import com.walterrezende.emojiappdemo.presentation.adapter.EmojiListAdapter
 import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModel
+import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModelFactory
 import com.walterrezende.emojiappdemo.repository.data.Emoji
+import com.walterrezende.emojiappdemo.repository.database.EmojiDatabase
+import timber.log.Timber
 
 class EmojiListFragment : Fragment() {
 
@@ -23,15 +26,26 @@ class EmojiListFragment : Fragment() {
     private val adapter by lazy { EmojiListAdapter(adapterListener) }
 
     private val adapterListener = EmojiClickListener { emojiId ->
-        viewModel.onEmojiClicked(emojiId)
+        emojiListViewModel.onEmojiClicked(emojiId)
     }
 
-    private val viewModel: EmojiListViewModel by lazy {
-        ViewModelProvider(this).get(EmojiListViewModel::class.java)
+    private val emojiListViewModel: EmojiListViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(EmojiListViewModel::class.java)
+    }
+
+    private val viewModelFactory: EmojiListViewModelFactory by lazy {
+        val application = requireNotNull(this.activity).application
+        val dataSource = EmojiDatabase.getInstance(application).emojiDatabaseDao
+        EmojiListViewModelFactory(dataSource)
     }
 
     private val emojiListObserver by lazy {
-        Observer<List<Emoji>?> { emojis -> emojis?.let { adapter.submitList(it) } }
+        Observer<List<Emoji>?> { emojis ->
+            emojis?.let {
+                Timber.d("##EMOJI DATABASE_LIST_SIZE: ${it.size}")
+                adapter.submitList(it)
+            }
+        }
     }
 
     override fun onCreateView(
@@ -42,7 +56,7 @@ class EmojiListFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_emojis_list, container, false)
 
-        binding.viewModel = viewModel
+        binding.viewModel = emojiListViewModel
         binding.gridLayoutManager = createGridLayoutManager()
         binding.emojiList.adapter = adapter
         binding.lifecycleOwner = this
@@ -60,13 +74,13 @@ class EmojiListFragment : Fragment() {
     }
 
     private fun addObservers() {
-        with(viewModel) {
+        with(emojiListViewModel) {
             emojiList.observe(this@EmojiListFragment, emojiListObserver)
         }
     }
 
     private fun removeObservers() {
-        with(viewModel) {
+        with(emojiListViewModel) {
             emojiList.removeObserver(emojiListObserver)
         }
     }

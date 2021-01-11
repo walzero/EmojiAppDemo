@@ -6,14 +6,20 @@ import com.walterrezende.emojiappdemo.repository.data.Emoji
 
 @Dao
 interface EmojiDatabaseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(emoji: Emoji)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(emojis: List<Emoji>)
 
     @Update
     suspend fun update(emoji: Emoji)
 
-    @Query("SELECT * from emojis WHERE emojiId = :id")
-    fun getEmojiWithId(id: Long): LiveData<Emoji>
+    @Query("SELECT * from emojis")
+    fun getAllEmojis(): LiveData<List<Emoji>>
+
+    @Query("SELECT * from emojis WHERE emoji_name = :name")
+    fun getEmojiWithName(name: String): LiveData<Emoji>
 
     @Query("DELETE FROM emojis")
     suspend fun clear()

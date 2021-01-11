@@ -12,7 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.walterrezende.emojiappdemo.R
 import com.walterrezende.emojiappdemo.databinding.FragmentMenuBinding
 import com.walterrezende.emojiappdemo.extensions.ifTrue
+import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModel
+import com.walterrezende.emojiappdemo.presentation.viewmodel.EmojiListViewModelFactory
 import com.walterrezende.emojiappdemo.presentation.viewmodel.MenuViewModel
+import com.walterrezende.emojiappdemo.repository.database.EmojiDatabase
 
 class MenuFragment : Fragment() {
 
@@ -20,6 +23,16 @@ class MenuFragment : Fragment() {
 
     private val menuViewModel: MenuViewModel by lazy {
         ViewModelProvider(this).get(MenuViewModel::class.java)
+    }
+
+    private val emojiListViewModel: EmojiListViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(EmojiListViewModel::class.java)
+    }
+
+    private val viewModelFactory: EmojiListViewModelFactory by lazy {
+        val application = requireNotNull(this.activity).application
+        val dataSource = EmojiDatabase.getInstance(application).emojiDatabaseDao
+        EmojiListViewModelFactory(dataSource)
     }
 
     private val navigateToEmojisObserver by lazy {
