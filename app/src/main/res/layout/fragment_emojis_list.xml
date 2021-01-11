@@ -22,11 +22,15 @@
             android:id="@+id/emoji_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layoutManager="@{gridLayoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="@{gridLayoutManager}"/>
+            tools:itemCount="10"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_emoji"
+            tools:spanCount="3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
